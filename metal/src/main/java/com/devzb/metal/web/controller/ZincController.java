@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devzb.framework.bean.Protocol;
 import com.devzb.framework.web.controller.BaseController;
@@ -43,12 +42,14 @@ public class ZincController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "data")
-	public @ResponseBody Protocol getJsonData(Model model) {
+	public String getJsonData(Model model) {
 
 		Protocol protocol = new Protocol();
 
 		protocol.setData(zincService.getMetalZincPricesForJson());
-
-		return protocol;
+		
+		model.addAttribute(protocol);
+		
+		return SUCCESS;
 	}
 }
