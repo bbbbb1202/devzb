@@ -10,7 +10,13 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-public class ZincPageProcessor implements PageProcessor {
+/**
+ * 金属锌爬虫处理器(http://hq.smm.cn)
+ * 
+ * @author zhangbin
+ *
+ */
+public class ZincSmmPageProcessor implements PageProcessor {
 	
 	private Logger			logger			= LoggerFactory.getLogger(getClass());
 	
@@ -33,13 +39,19 @@ public class ZincPageProcessor implements PageProcessor {
 		return site;
 	}
 
-	public static void main(String[] args) {
-		Spider spider = Spider.create(new ZincPageProcessor()).thread(2);
+	/**
+	 * 通过爬虫获取锌的价格
+	 * 
+	 * @return
+	 */
+	public static String getZincPriceBySpider() {
+		// 爬虫抓取
+		Spider spider = Spider.create(new ZincSmmPageProcessor()).thread(1);
 		String urlTemplate = "http://hq.smm.cn/xin";
 		ResultItems resultItems = spider.<ResultItems> get(urlTemplate);
-		System.out.println(resultItems);
-
+		String zincPrice = resultItems.get(ZincSmmPageProcessor.ZINC_PRICE_KEY);
 		spider.close();
-	}
 
+		return zincPrice;
+	}
 }

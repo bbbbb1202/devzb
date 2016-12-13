@@ -1,7 +1,7 @@
 package com.devzb.framework.bean;
 
+import com.alibaba.fastjson.JSON;
 import com.devzb.framework.enums.ResponseCode;
-import com.devzb.framework.utils.JsonUtil;
 
 /**
  * ajax统一返回结果
@@ -16,7 +16,7 @@ public class Protocol {
 
 	@Override
 	public String toString() {
-		return JsonUtil.getEntity2Json(this);
+		return JSON.toJSONString(this);
 	}
 
 	public Integer getCode() {

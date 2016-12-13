@@ -24,3 +24,5 @@ target/
 /target/
 upload/
 bluefile/
+
+pom.xml.versionsBackup

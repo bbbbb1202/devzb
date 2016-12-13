@@ -23,10 +23,7 @@ import com.devzb.metal.dao.model.MetalSms;
 import com.devzb.metal.dao.model.MetalSmsExample;
 import com.devzb.metal.dao.model.MetalZincPrice;
 import com.devzb.metal.dao.model.MetalZincPriceExample;
-import com.devzb.metal.processor.ZincPageProcessor;
-
-import us.codecraft.webmagic.ResultItems;
-import us.codecraft.webmagic.Spider;
+import com.devzb.metal.processor.ZincSmmPageProcessor;
 
 /**
  * 爬虫任务
@@ -42,12 +39,8 @@ public class SpiderJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		logger.info("SpiderJob Start.");
 
-		// 爬虫抓取
-		Spider spider = Spider.create(new ZincPageProcessor()).thread(1);
-		String urlTemplate = "http://hq.smm.cn/xin";
-		ResultItems resultItems = spider.<ResultItems> get(urlTemplate);
-		String zincPrice = resultItems.get(ZincPageProcessor.ZINC_PRICE_KEY);
-		spider.close();
+		String zincPrice = ZincSmmPageProcessor.getZincPriceBySpider();
+
 		if (StringUtils.isNumeric(zincPrice)) {
 			boolean isChange = false;
 			long price = Long.valueOf(zincPrice) * 10000;
@@ -129,5 +122,4 @@ public class SpiderJob extends QuartzJobBean {
 
 		logger.info("SpiderJob End.");
 	}
-
 }
