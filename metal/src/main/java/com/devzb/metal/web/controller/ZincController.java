@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.devzb.framework.common.BaseController;
 import com.devzb.framework.common.bean.Protocol;
-import com.devzb.metal.service.ZincService;
+import com.devzb.metal.service.MetalZincService;
 
 /**
  * 锌
@@ -22,7 +22,7 @@ import com.devzb.metal.service.ZincService;
 public class ZincController extends BaseController {
 
 	@Resource
-	private ZincService zincService;
+	private MetalZincService metalZincService;
 
 	/**
 	 * 首页
@@ -46,7 +46,7 @@ public class ZincController extends BaseController {
 
 		Protocol protocol = new Protocol();
 
-		protocol.setData(zincService.getMetalZincPricesForJson());
+		protocol.setData(metalZincService.getMetalZincPricesForJson());
 		
 		model.addAttribute(protocol);
 		

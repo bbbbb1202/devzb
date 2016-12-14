@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 
-import com.alibaba.fastjson.JSON;
 import com.devzb.framework.common.bean.Protocol;
 
 /**
@@ -27,7 +26,7 @@ public class WebDataUtil {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		try {
-			response.getWriter().print(JSON.toJSON(protocol));
+			response.getWriter().print(JsonUtil.getEntity2Json(protocol));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +63,7 @@ public class WebDataUtil {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		try {
-			response.getWriter().print(JSON.toJSON(protocol));
+			response.getWriter().print(JsonUtil.getEntity2Json(protocol));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

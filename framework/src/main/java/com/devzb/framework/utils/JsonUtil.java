@@ -7,6 +7,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -27,6 +28,7 @@ public class JsonUtil {
 	static {
 		mapper.configure(Feature.WRITE_NUMBERS_AS_STRINGS, true);
 		mapper.configure(Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
+		mapper.setSerializationInclusion(Include.NON_NULL);// null不参与序列化
 	}
 
 	/**

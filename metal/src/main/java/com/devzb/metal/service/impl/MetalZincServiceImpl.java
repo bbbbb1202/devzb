@@ -13,20 +13,18 @@ import com.devzb.metal.dao.dto.ZincJsonDto;
 import com.devzb.metal.dao.mapper.MetalZincPriceMapperExt;
 import com.devzb.metal.dao.model.MetalZincPrice;
 import com.devzb.metal.dao.model.MetalZincPriceExample;
-import com.devzb.metal.service.ZincService;
-import com.github.pagehelper.Page;
+import com.devzb.metal.service.MetalZincService;
 import com.github.pagehelper.PageHelper;
 
 @Service
-public class ZincServiceImpl extends BaseService implements ZincService {
+public class MetalZincServiceImpl extends BaseService implements MetalZincService {
 
 	@Resource
 	private MetalZincPriceMapperExt metalZincPriceMapperExt;
 
 	public List<MetalZincPrice> getMetalZincPrices() {
 
-		Page<MetalZincPrice> page = PageHelper.startPage(1, PageSize.SMALL.value);
-		page.setOrderBy("date_day desc");
+		PageHelper.startPage(1, PageSize.SMALL.value, "date_day desc");
 
 		MetalZincPriceExample example = new MetalZincPriceExample();
 		List<MetalZincPrice> list = metalZincPriceMapperExt
