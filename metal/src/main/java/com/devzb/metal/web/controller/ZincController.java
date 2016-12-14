@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.devzb.framework.bean.Protocol;
-import com.devzb.framework.web.controller.BaseController;
+import com.devzb.framework.common.BaseController;
+import com.devzb.framework.common.bean.Protocol;
 import com.devzb.metal.service.ZincService;
 
 /**

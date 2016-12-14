@@ -7,26 +7,31 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.devzb.framework.common.BaseService;
+import com.devzb.framework.common.enums.PageSize;
 import com.devzb.metal.dao.dto.ZincJsonDto;
 import com.devzb.metal.dao.mapper.MetalZincPriceMapperExt;
 import com.devzb.metal.dao.model.MetalZincPrice;
 import com.devzb.metal.dao.model.MetalZincPriceExample;
 import com.devzb.metal.service.ZincService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 @Service
-public class ZincServiceImpl implements ZincService {
+public class ZincServiceImpl extends BaseService implements ZincService {
 
 	@Resource
 	private MetalZincPriceMapperExt metalZincPriceMapperExt;
 
 	public List<MetalZincPrice> getMetalZincPrices() {
-		PageHelper.startPage(1, 8);
+
+		Page<MetalZincPrice> page = PageHelper.startPage(1, PageSize.SMALL.value);
+		page.setOrderBy("date_day desc");
 
 		MetalZincPriceExample example = new MetalZincPriceExample();
-		example.setOrderByClause("date_day desc");
 		List<MetalZincPrice> list = metalZincPriceMapperExt
 				.selectByExample(example);
+
 		return list;
 	}
 
