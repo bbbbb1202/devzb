@@ -1,7 +1,8 @@
-package com.devzb.framework.bean;
+
+package com.devzb.framework.common.bean;
 
 import com.alibaba.fastjson.JSON;
-import com.devzb.framework.enums.ResponseCode;
+import com.devzb.framework.common.enums.ResponseCode;
 
 /**
  * ajax统一返回结果

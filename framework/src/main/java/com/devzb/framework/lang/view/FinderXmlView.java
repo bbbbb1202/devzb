@@ -1,12 +1,12 @@
 
-package com.devzb.framework.view;
+package com.devzb.framework.lang.view;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.servlet.view.xml.MappingJackson2XmlView;
 
-import com.devzb.framework.bean.Protocol;
+import com.devzb.framework.common.bean.Protocol;
 
 /**
  * .xml请求的返回结果
@@ -15,7 +15,7 @@ import com.devzb.framework.bean.Protocol;
  *
  */
 public class FinderXmlView extends MappingJackson2XmlView {
-	private String	key	= Protocol.class.getSimpleName().toLowerCase();
+	private String key = Protocol.class.getSimpleName().toLowerCase();
 
 	@Override
 	protected Object filterModel(Map<String, Object> model) {
@@ -24,7 +24,7 @@ public class FinderXmlView extends MappingJackson2XmlView {
 			Protocol protocol = (Protocol) value;
 			root result = new root();
 			if (protocol.getCode() != null) {
-				result.put("code", protocol.getCode()+"");
+				result.put("code", protocol.getCode() + "");
 			}
 			if (protocol.getData() != null) {
 				result.put("data", protocol.getData());

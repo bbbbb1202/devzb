@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 
 import com.alibaba.fastjson.JSON;
-import com.devzb.framework.bean.Protocol;
+import com.devzb.framework.common.bean.Protocol;
 
 /**
  * web数据发送工具

@@ -1,4 +1,5 @@
-package com.devzb.framework.conversion;
+
+package com.devzb.framework.lang.conversion;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -13,10 +14,9 @@ public class CustomArgumentResolver implements HandlerMethodArgumentResolver {
 		return parameter.getParameterAnnotation(RequestAttribute.class) != null;
 	}
 
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
-			WebDataBinderFactory binderFactory) throws Exception {
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		RequestAttribute attr = parameter.getParameterAnnotation(RequestAttribute.class);
 		return webRequest.getAttribute(attr.value(), WebRequest.SCOPE_REQUEST);
 	}
-	
+
 }

@@ -27,14 +27,19 @@ import org.mybatis.generator.codegen.XmlConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Mybatis自动生成代码插件
+ * 
+ * @author zhangbin
+ *
+ */
 public class MybatisGeneratorPlugin extends PluginAdapter {
 
 	private static String	XMLFILE_POSTFIX			= "Ext";
 
 	private static String	JAVAFILE_POTFIX			= "Ext";
 
-	private static String	ANNOTATION_REPOSITORY	= Repository.class
-			.getName();
+	private static String	ANNOTATION_REPOSITORY	= Repository.class.getName();
 
 	/**
 	 * 在XXExample对象里添加StringFiled对象属性
@@ -43,10 +48,8 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 	 * @param introspectedTable
 	 * @param name
 	 */
-	public void addStringField(TopLevelClass topLevelClass,
-			IntrospectedTable introspectedTable, String name) {
-		topLevelClass.addImportedType(
-				new FullyQualifiedJavaType("java.lang.String"));
+	public void addStringField(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, String name) {
+		topLevelClass.addImportedType(new FullyQualifiedJavaType("java.lang.String"));
 		CommentGenerator commentGenerator = context.getCommentGenerator();
 		Field field = new Field();
 		field.setVisibility(JavaVisibility.PROTECTED);
@@ -59,8 +62,7 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 		Method method = new Method();
 		method.setVisibility(JavaVisibility.PUBLIC);
 		method.setName("set" + camel);
-		method.addParameter(new Parameter(
-				new FullyQualifiedJavaType("java.lang.String"), name));
+		method.addParameter(new Parameter(new FullyQualifiedJavaType("java.lang.String"), name));
 		method.addBodyLine("this." + name + "=" + name + ";");
 		commentGenerator.addGeneralMethodComment(method, introspectedTable);
 		topLevelClass.addMethod(method);
@@ -75,8 +77,7 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 
 	// 添删改Document的sql语句及属性
 	@Override
-	public boolean sqlMapDocumentGenerated(Document document,
-			IntrospectedTable introspectedTable) {
+	public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 
 		XmlElement parentElement = document.getRootElement();
 
@@ -117,10 +118,8 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 					if (attribute.getValue().equals("insertSelective")) {
 						oldElement = xmlElement;
 						newElement = xmlElement;
-						newElement.addAttribute(
-								new Attribute("useGeneratedKeys", "true"));
-						newElement.addAttribute(
-								new Attribute("keyProperty", "id"));
+						newElement.addAttribute(new Attribute("useGeneratedKeys", "true"));
+						newElement.addAttribute(new Attribute("keyProperty", "id"));
 						break;
 					}
 				}
@@ -146,8 +145,7 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 		parentElement.getElements().remove(insertElement);
 	}
 
-	private void updateDocumentNameSpace(IntrospectedTable introspectedTable,
-			XmlElement parentElement) {
+	private void updateDocumentNameSpace(IntrospectedTable introspectedTable, XmlElement parentElement) {
 		Attribute namespaceAttribute = null;
 		for (Attribute attribute : parentElement.getAttributes()) {
 			if (attribute.getName().equals("namespace")) {
@@ -155,15 +153,12 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 			}
 		}
 		parentElement.getAttributes().remove(namespaceAttribute);
-		parentElement.getAttributes()
-				.add(new Attribute("namespace",
-						introspectedTable.getMyBatis3JavaMapperType()
-								+ JAVAFILE_POTFIX));
+		parentElement.getAttributes().add(new Attribute("namespace", introspectedTable.getMyBatis3JavaMapperType()
+												+ JAVAFILE_POTFIX));
 	}
 
 	@Override
-	public boolean clientGenerated(Interface interfaze,
-			TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		List<Method> methods = interfaze.getMethods();
 		Method insertMethod = null;
 		for (Method method : methods) {
@@ -183,19 +178,16 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 		}
 		methods.remove(updateMethod);
 
-		return super.clientGenerated(interfaze, topLevelClass,
-				introspectedTable);
+		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
 	}
 
 	// 生成XXExt.xml
 	@Override
-	public List<GeneratedXmlFile> contextGenerateAdditionalXmlFiles(
-			IntrospectedTable introspectedTable) {
+	public List<GeneratedXmlFile> contextGenerateAdditionalXmlFiles(IntrospectedTable introspectedTable) {
 		String xmlName = introspectedTable.getMyBatis3XmlMapperFileName();
 
 		// 删除*Mapper.xml文件
-		deleteFile(context.getSqlMapGeneratorConfiguration().getTargetProject(),
-				introspectedTable.getMyBatis3XmlMapperPackage(), xmlName);
+		deleteFile(context.getSqlMapGeneratorConfiguration().getTargetProject(), introspectedTable.getMyBatis3XmlMapperPackage(), xmlName);
 
 		String[] splitFile = xmlName.split("\\.");
 		String fileNameExt = null;
@@ -203,25 +195,19 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 			fileNameExt = splitFile[0] + XMLFILE_POSTFIX + ".xml";
 		}
 
-		if (isExistExtFile(
-				context.getSqlMapGeneratorConfiguration().getTargetProject(),
-				introspectedTable.getMyBatis3XmlMapperPackage(), fileNameExt)) {
+		if (isExistExtFile(context.getSqlMapGeneratorConfiguration().getTargetProject(), introspectedTable.getMyBatis3XmlMapperPackage(), fileNameExt)) {
 			return super.contextGenerateAdditionalXmlFiles(introspectedTable);
 		}
 
-		Document document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID,
-				XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
+		Document document = new Document(XmlConstants.MYBATIS3_MAPPER_PUBLIC_ID, XmlConstants.MYBATIS3_MAPPER_SYSTEM_ID);
 
 		XmlElement root = new XmlElement("mapper");
 		document.setRootElement(root);
 		String namespace = introspectedTable.getMyBatis3SqlMapNamespace()
-				+ XMLFILE_POSTFIX;
+												+ XMLFILE_POSTFIX;
 		root.addAttribute(new Attribute("namespace", namespace));
 
-		GeneratedXmlFile gxf = new GeneratedXmlFile(document, fileNameExt,
-				introspectedTable.getMyBatis3XmlMapperPackage(),
-				context.getSqlMapGeneratorConfiguration().getTargetProject(),
-				false, context.getXmlFormatter());
+		GeneratedXmlFile gxf = new GeneratedXmlFile(document, fileNameExt, introspectedTable.getMyBatis3XmlMapperPackage(), context.getSqlMapGeneratorConfiguration().getTargetProject(), false, context.getXmlFormatter());
 
 		List<GeneratedXmlFile> answer = new ArrayList<GeneratedXmlFile>(1);
 		answer.add(gxf);
@@ -231,65 +217,48 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 
 	// 生成XXExt.java
 	@Override
-	public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(
-			IntrospectedTable introspectedTable) {
+	public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
 		String javaName = introspectedTable.getMyBatis3JavaMapperType();
 		String[] splitFile = javaName.split("\\.");
 
-		FullyQualifiedJavaType type = new FullyQualifiedJavaType(
-				javaName + JAVAFILE_POTFIX);
+		FullyQualifiedJavaType type = new FullyQualifiedJavaType(javaName
+												+ JAVAFILE_POTFIX);
 		Interface interfaze = new Interface(type);
 		interfaze.setVisibility(JavaVisibility.PUBLIC);
 		context.getCommentGenerator().addJavaFileComment(interfaze);
 
-		FullyQualifiedJavaType baseInterfaze = new FullyQualifiedJavaType(
-				introspectedTable.getMyBatis3JavaMapperType());
+		FullyQualifiedJavaType baseInterfaze = new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType());
 		interfaze.addSuperInterface(baseInterfaze);
 
-		FullyQualifiedJavaType annotation = new FullyQualifiedJavaType(
-				ANNOTATION_REPOSITORY);
+		FullyQualifiedJavaType annotation = new FullyQualifiedJavaType(ANNOTATION_REPOSITORY);
 		interfaze.addAnnotation("@" + Repository.class.getSimpleName());
 		interfaze.addImportedType(annotation);
 
 		CompilationUnit compilationUnits = interfaze;
-		GeneratedJavaFile generatedJavaFile = new GeneratedJavaFile(
-				compilationUnits,
-				context.getJavaModelGeneratorConfiguration().getTargetProject(),
-				context.getProperty(
-						PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
-				context.getJavaFormatter());
+		GeneratedJavaFile generatedJavaFile = new GeneratedJavaFile(compilationUnits, context.getJavaModelGeneratorConfiguration().getTargetProject(), context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING), context.getJavaFormatter());
 
 		// 删除*Mapper.java文件
-		deleteFile(generatedJavaFile.getTargetProject(),
-				generatedJavaFile.getTargetPackage(),
-				splitFile[splitFile.length - 1] + ".java");
+		deleteFile(generatedJavaFile.getTargetProject(), generatedJavaFile.getTargetPackage(), splitFile[splitFile.length
+												- 1] + ".java");
 
 		// 删除model文件
-		deleteFile(generatedJavaFile.getTargetProject(),
-				generatedJavaFile.getTargetPackage().replace("mapper", "model"),
-				splitFile[splitFile.length - 1].replace("Mapper", ".java"));
-		deleteFile(generatedJavaFile.getTargetProject(),
-				generatedJavaFile.getTargetPackage().replace("mapper", "model"),
-				splitFile[splitFile.length - 1].replace("Mapper",
-						"Example.java"));
-		deleteFile(generatedJavaFile.getTargetProject(),
-				generatedJavaFile.getTargetPackage().replace("mapper", "model"),
-				splitFile[splitFile.length - 1].replace("Mapper", "Key.java"));
+		deleteFile(generatedJavaFile.getTargetProject(), generatedJavaFile.getTargetPackage().replace("mapper", "model"), splitFile[splitFile.length
+												- 1].replace("Mapper", ".java"));
+		deleteFile(generatedJavaFile.getTargetProject(), generatedJavaFile.getTargetPackage().replace("mapper", "model"), splitFile[splitFile.length
+												- 1].replace("Mapper", "Example.java"));
+		deleteFile(generatedJavaFile.getTargetProject(), generatedJavaFile.getTargetPackage().replace("mapper", "model"), splitFile[splitFile.length
+												- 1].replace("Mapper", "Key.java"));
 
-		if (isExistExtFile(generatedJavaFile.getTargetProject(),
-				generatedJavaFile.getTargetPackage(),
-				generatedJavaFile.getFileName())) {
+		if (isExistExtFile(generatedJavaFile.getTargetProject(), generatedJavaFile.getTargetPackage(), generatedJavaFile.getFileName())) {
 			return super.contextGenerateAdditionalJavaFiles(introspectedTable);
 		}
-		List<GeneratedJavaFile> generatedJavaFiles = new ArrayList<GeneratedJavaFile>(
-				1);
+		List<GeneratedJavaFile> generatedJavaFiles = new ArrayList<GeneratedJavaFile>(1);
 		generatedJavaFile.getFileName();
 		generatedJavaFiles.add(generatedJavaFile);
 		return generatedJavaFiles;
 	}
 
-	private boolean isExistExtFile(String targetProject, String targetPackage,
-			String fileName) {
+	private boolean isExistExtFile(String targetProject, String targetPackage, String fileName) {
 
 		File project = new File(targetProject);
 		if (!project.isDirectory()) {
@@ -319,8 +288,7 @@ public class MybatisGeneratorPlugin extends PluginAdapter {
 		}
 	}
 
-	private void deleteFile(String targetProject, String targetPackage,
-			String fileName) {
+	private void deleteFile(String targetProject, String targetPackage, String fileName) {
 		File project = new File(targetProject);
 		if (!project.isDirectory()) {
 			return;

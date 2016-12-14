@@ -1,10 +1,10 @@
 
-package com.devzb.framework.enums;
+package com.devzb.framework.common.enums;
 
 /**
- * 请求返回code
+ * 请求返回的code枚举
  * 
- * @author zhangb
+ * @author zhangbin
  *
  */
 public enum ResponseCode {
@@ -24,7 +24,11 @@ public enum ResponseCode {
 	/**
 	 * 缺少参数
 	 */
-	LOST(400001);
+	LOST(400001),
+	/**
+	 * 未登录
+	 */
+	NO_LOGIN(200401);
 
 	public Integer code;
 

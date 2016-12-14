@@ -1,4 +1,5 @@
-package com.devzb.framework.web.controller;
+
+package com.devzb.framework.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +11,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.devzb.framework.utils.WebDataUtil;
 
-
 /**
  * 基础Controller，公共的方法在这里处理
  * 
@@ -19,7 +19,7 @@ import com.devzb.framework.utils.WebDataUtil;
  */
 public class BaseController {
 
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	protected Logger				logger	= LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 成功页面

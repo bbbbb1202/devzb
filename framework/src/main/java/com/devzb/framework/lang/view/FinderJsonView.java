@@ -1,12 +1,12 @@
 
-package com.devzb.framework.view;
+package com.devzb.framework.lang.view;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.devzb.framework.bean.Protocol;
+import com.devzb.framework.common.bean.Protocol;
 
 /**
  * .json请求的返回结果
@@ -15,7 +15,7 @@ import com.devzb.framework.bean.Protocol;
  *
  */
 public class FinderJsonView extends MappingJackson2JsonView {
-	private String	key	= Protocol.class.getSimpleName().toLowerCase();
+	private String key = Protocol.class.getSimpleName().toLowerCase();
 
 	@Override
 	protected Object filterModel(Map<String, Object> model) {

@@ -11,11 +11,11 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven conversion-service="conversionService" enable-matrix-variables="true">
 		<argument-resolvers>
-			<beans:bean class="com.devzb.framework.conversion.CustomArgumentResolver"/>
+			<beans:bean class="com.devzb.framework.lang.conversion.CustomArgumentResolver"/>
 		</argument-resolvers>
 		<async-support default-timeout="3000">
 			<callable-interceptors>
-				<beans:bean class="com.devzb.framework.async.TimeoutCallableProcessingInterceptor" />
+				<beans:bean class="com.devzb.framework.lang.async.TimeoutCallableProcessingInterceptor" />
 			</callable-interceptors>
 		</async-support>
 	</annotation-driven>
@@ -33,7 +33,7 @@
 	<!-- Only needed because we install custom converters to support the examples in the org.springframewok.samples.mvc.convert package -->
 	<beans:bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<beans:property name="formatters">
-            <beans:bean class="com.devzb.framework.convert.MaskFormatAnnotationFormatterFactory" />
+            <beans:bean class="com.devzb.framework.lang.convert.MaskFormatAnnotationFormatterFactory" />
 		</beans:property>
 	</beans:bean>
 
@@ -65,8 +65,8 @@
 		</beans:property>
 		<beans:property name="defaultViews">
 			<beans:list>
-				<beans:bean class="com.devzb.framework.view.FinderJsonView"/>
-				<beans:bean class="com.devzb.framework.view.FinderXmlView"/>
+				<beans:bean class="com.devzb.framework.lang.view.FinderJsonView"/>
+				<beans:bean class="com.devzb.framework.lang.view.FinderXmlView"/>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

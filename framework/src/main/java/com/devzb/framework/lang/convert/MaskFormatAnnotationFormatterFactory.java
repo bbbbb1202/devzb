@@ -1,4 +1,5 @@
-package com.devzb.framework.convert;
+
+package com.devzb.framework.lang.convert;
 
 import java.text.ParseException;
 import java.util.HashSet;
@@ -10,7 +11,8 @@ import org.springframework.format.Formatter;
 import org.springframework.format.Parser;
 import org.springframework.format.Printer;
 
-public class MaskFormatAnnotationFormatterFactory implements AnnotationFormatterFactory<MaskFormat> {
+public class MaskFormatAnnotationFormatterFactory implements
+										AnnotationFormatterFactory<MaskFormat> {
 
 	public Set<Class<?>> getFieldTypes() {
 		Set<Class<?>> fieldTypes = new HashSet<Class<?>>(1, 1);
@@ -25,7 +27,7 @@ public class MaskFormatAnnotationFormatterFactory implements AnnotationFormatter
 	public Printer<?> getPrinter(MaskFormat annotation, Class<?> fieldType) {
 		return new MaskFormatter(annotation.value());
 	}
-	
+
 	private static class MaskFormatter implements Formatter<String> {
 
 		private javax.swing.text.MaskFormatter delegate;
@@ -35,7 +37,8 @@ public class MaskFormatAnnotationFormatterFactory implements AnnotationFormatter
 				this.delegate = new javax.swing.text.MaskFormatter(mask);
 				this.delegate.setValueContainsLiteralCharacters(false);
 			} catch (ParseException e) {
-				throw new IllegalStateException("Mask could not be parsed " + mask, e);
+				throw new IllegalStateException("Mask could not be parsed "
+														+ mask, e);
 			}
 		}
 
@@ -43,7 +46,8 @@ public class MaskFormatAnnotationFormatterFactory implements AnnotationFormatter
 			try {
 				return delegate.valueToString(object);
 			} catch (ParseException e) {
-				throw new IllegalArgumentException("Unable to print using mask " + delegate.getMask(), e);
+				throw new IllegalArgumentException("Unable to print using mask "
+														+ delegate.getMask(), e);
 			}
 		}
 
