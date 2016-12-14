@@ -2,6 +2,7 @@ package com.devzb.tucao.service;
 
 import com.devzb.framework.common.bean.SimplePage;
 import com.devzb.tucao.dao.dto.TucaoItemDto;
+import com.devzb.tucao.dao.model.TucaoItem;
 import com.github.pagehelper.Page;
 
 /**
@@ -19,4 +20,6 @@ public interface TucaoItemService {
 	 * @return
 	 */
 	public SimplePage<TucaoItemDto> getTucaoItems(Page<TucaoItemDto> page);
+
+	public TucaoItem saveTucaoItem(TucaoItem tucaoItem);
 }
