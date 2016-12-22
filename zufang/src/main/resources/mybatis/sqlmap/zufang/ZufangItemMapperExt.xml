@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.devzb.zufang.dao.mapper.ZufangItemMapperExt">
+	<resultMap id="ZufangItemDto" type="com.devzb.zufang.dao.dto.ZufangItemDto"
+		extends="BaseResultMap">
+	</resultMap>
+
+	<select id="selectByExampleForDto" resultMap="ZufangItemDto"
+		parameterType="com.devzb.zufang.dao.model.ZufangItemExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from zufang_item
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+</mapper>

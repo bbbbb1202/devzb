@@ -12,5 +12,6 @@
 		<module>framework</module>
 		<module>metal</module>
 		<module>tucao</module>
+		<module>zufang</module>
 	</modules>
 </project>

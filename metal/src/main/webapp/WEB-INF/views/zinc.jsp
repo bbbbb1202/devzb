@@ -3,13 +3,15 @@
 <html>
 <head>
 	<title>My HTML View</title>
-	<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
+	<link src="http://static.devzb.com/resources/form.css" rel="stylesheet"  type="text/css" />		
 </head>
 <body>
 <div id="graph">Loading graph...</div>
 
-<script type="text/javascript" src="<c:url value="/resources/jquery/1.11/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/devzb/common.js" />"></script>
+<script type="text/javascript" src="http://static.devzb.com/resources/jquery/1.11/jquery.js"></script>
+
+<%-- <script type="text/javascript" src="<c:url value="/resources/jquery/1.11/jquery.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/devzb/common.js" />"></script> --%>
 <script type="text/javascript" src="<c:url value="/resources/jscharts.js" />"></script>
 
 <script type="text/javascript">
