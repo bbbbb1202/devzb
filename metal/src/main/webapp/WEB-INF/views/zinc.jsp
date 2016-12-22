@@ -2,16 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-	<title>My HTML View</title>
-	<link src="http://static.devzb.com/resources/form.css" rel="stylesheet"  type="text/css" />		
+	<title>锌价格表</title>
+	<link href="http://static.devzb.com/resources/form.css" rel="stylesheet"  type="text/css" />
 </head>
 <body>
 <div id="graph">Loading graph...</div>
 
 <script type="text/javascript" src="http://static.devzb.com/resources/jquery/1.11/jquery.js"></script>
-
-<%-- <script type="text/javascript" src="<c:url value="/resources/jquery/1.11/jquery.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/devzb/common.js" />"></script> --%>
+<script type="text/javascript" src="http://static.devzb.com/resources/main/common.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/jscharts.js" />"></script>
 
 <script type="text/javascript">
