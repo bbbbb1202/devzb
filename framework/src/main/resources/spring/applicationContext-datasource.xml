@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- 阿里 druid数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-		<!-- 数据库基本信息配置 -->
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
-		<property name="driverClassName" value="${driverClassName}" />
-		<property name="filters" value="stat" />
-		<!-- 最大并发连接数 -->
-		<property name="maxActive" value="${maxActive}" />
-		<!-- 初始化连接数量 -->
-		<property name="initialSize" value="${initialSize}" />
+	<bean id="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<!-- 配置获取连接等待超时的时间 -->
 		<property name="maxWait" value="${maxWait}" />
 		<!-- 最小空闲连接数 -->
 		<property name="minIdle" value="${minIdle}" />
+		<property name="filters" value="stat" />
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
 		<property name="timeBetweenEvictionRunsMillis" value="60000" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
@@ -39,5 +33,40 @@
 		<property name="logAbandoned" value="true" />
 	</bean>
 	
+	<bean id="dataSource" parent="parentDataSource">
+		<!-- 数据库基本信息配置 -->
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${driverClassName}" />
+		<!-- 最大并发连接数 -->
+		<property name="maxActive" value="${maxActive}" />
+		<!-- 初始化连接数量 -->
+		<property name="initialSize" value="${initialSize}" />
+	</bean>
+	
+	<!-- 事务控制 -->
+	<bean name="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="is*" read-only="true" />
+			<tx:method name="has*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+	   	<aop:pointcut id="bizPointcut" expression="execution(* com.devzb.**.service.impl.**ServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bizPointcut" />
+	</aop:config>
+	
+	<!-- 引入mybatis配置文件 -->
 	<import resource="classpath:mybatis/mybatis-config.xml" />
 </beans>

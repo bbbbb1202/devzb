@@ -31,12 +31,12 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- jstl -->
 		<dependency>
-		    <groupId>jstl</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.2</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -59,11 +59,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
 		<!-- Logging -->
@@ -101,7 +109,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.3</version>
 		</dependency>
-		
+
 		<!-- Jackson XML Processor -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -219,7 +227,7 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		
+
 		<!-- webmagic爬虫 -->
 		<dependency>
 			<groupId>us.codecraft</groupId>
@@ -231,7 +239,7 @@
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.5.3</version>
 		</dependency>
-		
+
 		<!-- httpclient -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
@@ -263,6 +271,11 @@
 				<version>${org.springframework-version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${org.springframework-version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-web</artifactId>
 				<version>${org.springframework.security-version}</version>
@@ -272,7 +285,12 @@
 				<artifactId>aspectjrt</artifactId>
 				<version>${org.aspectj-version}</version>
 			</dependency>
-			
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${org.aspectj-version}</version>
+			</dependency>
+
 			<!-- 管理slf4j版本 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -291,7 +309,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
