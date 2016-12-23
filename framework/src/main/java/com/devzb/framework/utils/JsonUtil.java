@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,8 +33,11 @@ public class JsonUtil {
 	}
 
 	/**
+	 * JSON字符串转换为对象
 	 * 
-	 * JSON字符串转换为对象 JSON:"{\"type\":\"tom\"}"; resultSetClass:Metadata.class实体对象
+	 * @param json
+	 * @param resultSetClass
+	 * @return
 	 */
 	public static <E> E getJson2Entity(String json, Class<E> resultSetClass) {
 		Object obj = null;
@@ -44,24 +48,21 @@ public class JsonUtil {
 			obj = mapper.readValue(json, resultSetClass);
 		} catch (JsonParseException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		} catch (JsonMappingException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		} catch (IOException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		}
 		return (E) obj;
 	}
 
 	/**
-	 * 
 	 * JSON字符串转换为泛型list
 	 * 
-	 * 
-	 * 
-	 * @param <E>
+	 * @param json
+	 * @param collectionClass
+	 * @param elementClasses
+	 * @return
 	 */
 	public static <E> List<E> getJson2EntityList(String json, Class<?> collectionClass, Class<?>... elementClasses) {
 		Object obj = null;
@@ -74,13 +75,10 @@ public class JsonUtil {
 			obj = mapper.readValue(json, javaType);
 		} catch (JsonParseException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		} catch (JsonMappingException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		} catch (IOException e) {
 			logger.error("Json Object Generat Fail: {} ", e.getMessage());
-			// e.printStackTrace();
 		}
 		return (List<E>) obj;
 	}
@@ -97,5 +95,66 @@ public class JsonUtil {
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	/**
+	 * JSON字符串转换为对象(注：有未匹配的字段只是忽略该字段，不影响其他的字段)
+	 * 
+	 * @param json
+	 * @param resultSetClass
+	 * @return
+	 */
+	public static <E> E getJson2EntityWithUnknown(String json, Class<E> resultSetClass) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(Feature.WRITE_NUMBERS_AS_STRINGS, true);
+		mapper.configure(Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);// 有未匹配的字段不会报错
+
+		Object obj = null;
+		try {
+			if (json == null || "".equals(json)) {
+				return null;
+			}
+			obj = mapper.readValue(json, resultSetClass);
+		} catch (JsonParseException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		} catch (JsonMappingException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		} catch (IOException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		}
+		return (E) obj;
+	}
+
+	/**
+	 * JSON字符串转换为泛型list(注：有未匹配的字段只是忽略该字段，不影响其他的字段)
+	 * 
+	 * @param json
+	 * @param collectionClass
+	 * @param elementClasses
+	 * @return
+	 */
+	public static <E> List<E> getJson2EntityListWithUnknown(String json, Class<?> collectionClass, Class<?>... elementClasses) {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(Feature.WRITE_NUMBERS_AS_STRINGS, true);
+		mapper.configure(Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);// 有未匹配的字段不会报错
+
+		Object obj = null;
+		try {
+			if (json == null || "".equals(json)) {
+				return null;
+			}
+			@SuppressWarnings("deprecation")
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+			obj = mapper.readValue(json, javaType);
+		} catch (JsonParseException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		} catch (JsonMappingException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		} catch (IOException e) {
+			logger.error("Json Object Generat Fail: {} ", e.getMessage());
+		}
+		return (List<E>) obj;
 	}
 }
