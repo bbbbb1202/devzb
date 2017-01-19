@@ -32,7 +32,13 @@
 	</beans:bean>
 
 	<!-- Only needed because we require fileupload in the org.springframework.samples.mvc.fileupload package -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<beans:bean id="multipartResolver" class="com.devzb.framework.lang.resolver.DevzbMultipartResolver">
+		<beans:property name="exclusions">
+			<beans:array>
+				<beans:value>/ueditor</beans:value>
+			</beans:array>
+		</beans:property>
+	</beans:bean>
 
 	<beans:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<beans:property name="mediaTypes">
