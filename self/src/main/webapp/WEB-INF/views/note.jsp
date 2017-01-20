@@ -6,7 +6,8 @@
 	<%@include file="head.jsp"%>
 </head>
 <body>
-<div id="div_content"></div>
+<div id="div_content">
+</div>
 <div id="div_page"></div>
 <%@include file="footer.jsp"%>
 <script src="/resources/devzb/note.js"></script>
