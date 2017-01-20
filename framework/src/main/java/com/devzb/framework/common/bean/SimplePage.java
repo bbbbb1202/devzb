@@ -7,6 +7,13 @@ import com.devzb.framework.common.enums.PageSize;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.pagehelper.PageInfo;
 
+/**
+ * 简单分页对象
+ * 
+ * @author zhangbin
+ *
+ * @param <T>
+ */
 @JsonIgnoreProperties(value = { "endRow", "firstPage", "hasNextPage",
 										"hasPreviousPage", "isFirstPage",
 										"isLastPage", "lastPage",

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="zb_db">
+		<plugin type="com.devzb.framework.plugin.MybatisGeneratorPlugin" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://rdsynhiw20t9tewza0gjgpublic.mysql.rds.aliyuncs.com:3306/test_db" userId="test_user"
+			password="Hello1234" />
+		<javaModelGenerator targetPackage="com.devzb.self.dao.model"
+			targetProject="src/main/java" />
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.self"
+			targetProject="src/main/resources" />
+		<javaClientGenerator targetPackage="com.devzb.self.dao.mapper"
+			targetProject="src/main/java" type="XMLMAPPER" />
+
+		<table tableName="metal_zinc_price" />
+		<table tableName="metal_sms" />
+		<table tableName="metal_mobile" />
+		
+		<table tableName="note_item" />
+		<table tableName="note_item_tag" />
+		<table tableName="note_tag" />
+	</context>
+</generatorConfiguration>

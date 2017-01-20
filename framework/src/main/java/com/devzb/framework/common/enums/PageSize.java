@@ -10,22 +10,22 @@ package com.devzb.framework.common.enums;
 public enum PageSize {
 
 	/**
-	 * 小
+	 * 8
 	 */
 	SMALL(8),
 
 	/**
-	 * 中
+	 * 15
 	 */
 	MIDDLE(15),
 
 	/**
-	 * 大
+	 * 30
 	 */
 	LARGE(30),
 
 	/**
-	 * 最大
+	 * 100
 	 */
 	MAX(100);
 

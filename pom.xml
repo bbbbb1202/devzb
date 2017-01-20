@@ -10,7 +10,7 @@
 
 	<modules>
 		<module>framework</module>
-		<module>metal</module>
+		<module>self</module>
 		<module>tucao</module>
 		<module>zufang</module>
 	</modules>
