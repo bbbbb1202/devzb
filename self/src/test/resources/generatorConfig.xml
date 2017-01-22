@@ -3,18 +3,34 @@
 <generatorConfiguration>
 	<context id="zb_db">
 		<plugin type="com.devzb.framework.plugin.MybatisGeneratorPlugin" />
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://rdsynhiw20t9tewza0gjgpublic.mysql.rds.aliyuncs.com:3306/test_db" userId="test_user"
+		<jdbcConnection
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://rdsynhiw20t9tewza0gjgpublic.mysql.rds.aliyuncs.com:3306/test_db"
+			userId="test_user"
 			password="Hello1234" />
-		<javaModelGenerator targetPackage="com.devzb.note.dao.model"
-			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="mybatis.sqlmap.note"
-			targetProject="src/main/resources" />
-		<javaClientGenerator targetPackage="com.devzb.note.dao.mapper"
-			targetProject="src/main/java" type="XMLMAPPER" />
-
+		
+		<javaModelGenerator targetPackage="com.devzb.note.dao.model" targetProject="src/main/java" />
+		<javaClientGenerator targetPackage="com.devzb.note.dao.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.note" targetProject="src/main/resources" />
 		<table tableName="note_item" />
 		<table tableName="note_item_tag" />
 		<table tableName="note_tag" />
+		
+		<!-- <javaModelGenerator targetPackage="com.devzb.metal.dao.model" targetProject="src/main/java" />
+		<javaClientGenerator targetPackage="com.devzb.metal.dao.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.metal" targetProject="src/main/resources" />
+		<table tableName="metal_zinc_price" />
+		<table tableName="metal_sms" />
+		<table tableName="metal_mobile" /> -->
+		
+		<!-- <javaModelGenerator targetPackage="com.devzb.zufang.dao.model" targetProject="src/main/java" />
+		<javaClientGenerator targetPackage="com.devzb.zufang.dao.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.zufang" targetProject="src/main/resources" />
+		<table tableName="zufang_item" /> -->
+		
+		<!-- <javaModelGenerator targetPackage="com.devzb.tucao.dao.model" targetProject="src/main/java" />
+		<javaClientGenerator targetPackage="com.devzb.tucao.dao.mapper" targetProject="src/main/java" type="XMLMAPPER" />
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.tucao" targetProject="src/main/resources" />
+		<table tableName="tucao_item" /> -->
 	</context>
 </generatorConfiguration>
