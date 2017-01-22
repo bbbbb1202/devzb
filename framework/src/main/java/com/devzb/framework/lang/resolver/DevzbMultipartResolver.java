@@ -16,7 +16,7 @@ public class DevzbMultipartResolver extends CommonsMultipartResolver {
 	public boolean isMultipart(javax.servlet.http.HttpServletRequest request) {
 
 		String path = request.getServletPath();
-		if (path.indexOf("/resources") == 0) {// 静态文件直接跳过
+		if ("/favicon.ico".equals(path) || path.indexOf("/resources") == 0) {// 静态文件直接跳过
 			return false;
 		}
 

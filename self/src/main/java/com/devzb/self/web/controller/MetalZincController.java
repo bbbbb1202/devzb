@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.devzb.framework.common.BaseController;
 import com.devzb.framework.common.bean.Protocol;
-import com.devzb.self.dao.model.NoteItem;
-import com.devzb.self.service.NoteService;
+import com.devzb.self.service.MetalZincService;
 
 /**
- * 笔记controller
+ * 金属平台-锌
  * 
  * @author zhangbin
  *
  */
 @Controller
-@RequestMapping("note")
-public class NoteController extends BaseController {
+@RequestMapping("metal/zinc")
+public class MetalZincController extends BaseController {
 
 	@Resource
-	private NoteService noteService;
+	private MetalZincService metalZincService;
 
 	/**
 	 * 首页
@@ -32,38 +31,25 @@ public class NoteController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String index(Model model) {
-		return "note/note";
+	public String zinc(Model model) {
+		return "metal/zinc";
 	}
 
 	/**
-	 * 笔记json数据
+	 * 锌json数据
 	 * 
 	 * @param model
-	 * @param pageNum
 	 * @return
 	 */
 	@RequestMapping(value = "data")
-	public String getJsonData(Model model, Integer pageNum) {
+	public String zincData(Model model) {
 
 		Protocol protocol = new Protocol();
 
-		protocol.setData(noteService.getNotes(pageNum));
+		protocol.setData(metalZincService.getMetalZincPricesForJson());
 		
 		model.addAttribute(protocol);
 		
-		return SUCCESS;
-	}
-
-	@RequestMapping(value = "save")
-	public String saveNote(Model model, NoteItem noteItem) {
-
-		Protocol protocol = new Protocol();
-
-		protocol.setData(noteService.saveNote(noteItem));
-
-		model.addAttribute(protocol);
-
 		return SUCCESS;
 	}
 }
