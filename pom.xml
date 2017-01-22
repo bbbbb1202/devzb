@@ -4,14 +4,12 @@
 	<groupId>com.devzb</groupId>
 	<artifactId>devzb</artifactId>
 	<version>1.0.0</version>
-	<name>devzb</name>
+	<name>DEVZB</name>
 	<url>http://www.devzb.com</url>
 	<packaging>pom</packaging>
 
 	<modules>
 		<module>framework</module>
 		<module>self</module>
-		<module>tucao</module>
-		<module>zufang</module>
 	</modules>
 </project>
