@@ -44,12 +44,23 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="com.devzb.self">
+	<!-- 系统 -->
+	<logger name="com.devzb.system">
 		<level value="debug" />
 	</logger>
+	<!-- 笔记 -->
+	<logger name="com.devzb.note">
+		<level value="debug" />
+	</logger>
+	<!-- 金属 -->
+	<logger name="com.devzb.metal">
+		<level value="debug" />
+	</logger>
+	<!-- 吐槽 -->
 	<logger name="com.devzb.tucao">
 		<level value="debug" />
 	</logger>
+	<!-- 租房-->
 	<logger name="com.devzb.zufang">
 		<level value="debug" />
 	</logger>

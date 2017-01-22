@@ -23,7 +23,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- For times when you just need to invoke a method on a specific object -->
 	<bean id="spiderJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="com.devzb.self.quartz.SpiderJob" />
+		<property name="jobClass" value="com.devzb.metal.quartz.SpiderJob" />
 		<property name="durability" value="true" />
 		<property name="jobDataMap">
 			<map>

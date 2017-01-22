@@ -6,17 +6,13 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://rdsynhiw20t9tewza0gjgpublic.mysql.rds.aliyuncs.com:3306/test_db" userId="test_user"
 			password="Hello1234" />
-		<javaModelGenerator targetPackage="com.devzb.self.dao.model"
+		<javaModelGenerator targetPackage="com.devzb.note.dao.model"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="mybatis.sqlmap.self"
+		<sqlMapGenerator targetPackage="mybatis.sqlmap.note"
 			targetProject="src/main/resources" />
-		<javaClientGenerator targetPackage="com.devzb.self.dao.mapper"
+		<javaClientGenerator targetPackage="com.devzb.note.dao.mapper"
 			targetProject="src/main/java" type="XMLMAPPER" />
 
-		<table tableName="metal_zinc_price" />
-		<table tableName="metal_sms" />
-		<table tableName="metal_mobile" />
-		
 		<table tableName="note_item" />
 		<table tableName="note_item_tag" />
 		<table tableName="note_tag" />
