@@ -31,7 +31,7 @@
 	
 	<!-- 输出到文件 -->
 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="logs/devzb-metal.log" />
+		<param name="File" value="logs/devzb-self.log" />
 		<param name="Append" value="true" />
 		<param name="MaxFileSize" value="1000KB" />
 		<param name="MaxBackupIndex" value="50" />
