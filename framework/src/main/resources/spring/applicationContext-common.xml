@@ -45,7 +45,7 @@
 			<beans:value>
 				html=text/html
 				json=application/json
-				xml=application/xml
+				<!-- xml=application/xml -->
 			</beans:value>
 		</beans:property>
 		<beans:property name="defaultContentType" value="text/html" />
@@ -65,7 +65,7 @@
 		<beans:property name="defaultViews">
 			<beans:list>
 				<beans:bean class="com.devzb.framework.lang.view.FinderJsonView"/>
-				<beans:bean class="com.devzb.framework.lang.view.FinderXmlView"/>
+				<!-- <beans:bean class="com.devzb.framework.lang.view.FinderXmlView"/> -->
 			</beans:list>
 		</beans:property>
 	</beans:bean>
