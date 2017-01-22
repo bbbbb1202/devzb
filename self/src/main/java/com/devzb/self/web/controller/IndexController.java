@@ -12,6 +12,6 @@ public class IndexController extends BaseController {
 
 	@RequestMapping(value = "")
 	public String index(Model model) {
-		return "index";
+		return "login";
 	}
 }
