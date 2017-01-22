@@ -1,0 +1,17 @@
+.devzb_main {
+	font-family: Lucida Grande, sans-serif;
+	font-size: .75em;
+	margin: 1em auto;
+	max-width: 800px;
+}
+
+.footer {
+	width: 100%;
+	margin: 0 auto;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font: 12px arial;
+	text-align: center;
+	color: #9E9E9E;
+	position: fixed;
+	bottom: 30px;
+}

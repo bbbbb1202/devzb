@@ -6,9 +6,11 @@
 	<%@include file="../common/head.jsp"%>
 </head>
 <body>
-<div id="graph">载入中...</div>
-<%@include file="../common/footer.jsp"%>
-<script type="text/javascript" src="/resources/jscharts.js"></script>
-<script type="text/javascript" src="/resources/devzb/metal/zinc.js"></script>
+	<div class="devzb_main">
+		<div id="graph">载入中...</div>
+	</div>
+	<%@include file="../common/footer.jsp"%>
+	<script type="text/javascript" src="/resources/js/jscharts.js"></script>
+	<script type="text/javascript" src="/resources/js/devzb/metal/zinc.js"></script>
 </body>
 </html>

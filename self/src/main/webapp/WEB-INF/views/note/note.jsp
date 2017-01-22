@@ -6,10 +6,11 @@
 	<%@include file="../common/head.jsp"%>
 </head>
 <body>
-<div id="div_content">
-</div>
-<div id="div_page"></div>
-<%@include file="../common/footer.jsp"%>
-<script src="/resources/devzb/note/note.js"></script>
+	<div class="devzb_main">
+		<div id="div_content"></div>
+		<div id="div_page"></div>
+	</div>
+	<%@include file="../common/footer.jsp"%>
+	<script src="/resources/js/devzb/note/note.js"></script>
 </body>
 </html>
