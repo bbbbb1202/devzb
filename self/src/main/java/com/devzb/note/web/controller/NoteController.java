@@ -11,6 +11,7 @@ import com.devzb.framework.common.BaseController;
 import com.devzb.framework.common.bean.Protocol;
 import com.devzb.note.dao.model.NoteItem;
 import com.devzb.note.service.NoteService;
+import com.github.pagehelper.Page;
 
 /**
  * 笔记controller
@@ -40,15 +41,15 @@ public class NoteController extends BaseController {
 	 * 笔记json数据
 	 * 
 	 * @param model
-	 * @param pageNum
+	 * @param page
 	 * @return
 	 */
 	@RequestMapping(value = "data")
-	public String getJsonData(Model model, Integer pageNum) {
+	public String getJsonData(Model model, Page<NoteItem> page) {
 
 		Protocol protocol = new Protocol();
 
-		protocol.setData(noteService.getNotes(pageNum));
+		protocol.setData(noteService.getNotes(page));
 		
 		model.addAttribute(protocol);
 		

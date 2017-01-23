@@ -2,6 +2,7 @@ package com.devzb.note.service;
 
 import com.devzb.framework.common.bean.SimplePage;
 import com.devzb.note.dao.model.NoteItem;
+import com.github.pagehelper.Page;
 
 /**
  * 笔记service
@@ -14,10 +15,10 @@ public interface NoteService {
 	/**
 	 * 获取笔记列表
 	 * 
-	 * @param pageNum
+	 * @param page
 	 * @return
 	 */
-	public SimplePage<NoteItem> getNotes(Integer pageNum);
+	public SimplePage<NoteItem> getNotes(Page<NoteItem> page);
 
 	/**
 	 * 保存笔记

@@ -21,6 +21,7 @@ import com.devzb.note.dao.model.NoteItemTagExample;
 import com.devzb.note.dao.model.NoteTag;
 import com.devzb.note.dao.model.NoteTagExample;
 import com.devzb.note.service.NoteService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 @Service
@@ -34,17 +35,18 @@ public class NoteServiceImpl implements NoteService {
 	private NoteTagMapperExt		noteTagMapperExt;
 
 	@Override
-	public SimplePage<NoteItem> getNotes(Integer pageNum) {
-		if (pageNum == null) {
-			pageNum = 1;
+	public SimplePage<NoteItem> getNotes(Page<NoteItem> page) {
+		if (1 == page.getPageNum()) {// 初始化（第一次）页码数量设置成100
+			page.setPageSize(PageSize.MAX.value);
 		}
-		PageHelper.startPage(pageNum, PageSize.LARGE.value, "gmt_created desc");
+
+		PageHelper.startPage(page.getPageNum(), page.getPageSize(), "gmt_created desc");
 
 		NoteItemExample example = new NoteItemExample();
 
 		List<NoteItem> list = noteItemMapperExt.selectByExample(example);
 
-		return new SimplePage<>(list);
+		return new SimplePage<>(list, page.getPageSize());
 	}
 
 	@Override
