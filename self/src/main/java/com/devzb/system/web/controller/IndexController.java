@@ -15,4 +15,12 @@ public class IndexController extends BaseController {
 	public String index(Model model) {
 		return "login";
 	}
+
+	@RequestMapping(value = "index/404", method = RequestMethod.GET)
+	public String index404(Model model) {
+
+		model.addAttribute("message", "您访问的页面不存在");
+
+		return "framework/error_404";
+	}
 }

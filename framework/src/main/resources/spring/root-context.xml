@@ -14,6 +14,15 @@
 		<constructor-arg>
 			<bean class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"/>
 		</constructor-arg>
+		<property name="requireCsrfProtectionMatcher">
+			<bean class="com.devzb.framework.lang.config.DevzbCsrfMatcher">
+				<property name="exclusions">
+					<array>
+						<value>/druid</value>
+					</array>
+				</property>
+			</bean>
+		</property>
 	</bean>
 	<!--
 		Provides automatic CSRF token inclusion when using Spring MVC Form tags or Thymeleaf. See
