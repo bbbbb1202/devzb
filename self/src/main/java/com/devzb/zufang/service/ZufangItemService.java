@@ -1,8 +1,8 @@
 package com.devzb.zufang.service;
 
+import com.devzb.framework.common.bean.PageParam;
 import com.devzb.framework.common.bean.SimplePage;
 import com.devzb.zufang.dao.dto.ZufangItemDto;
-import com.github.pagehelper.Page;
 
 /**
  * 租房service
@@ -18,5 +18,5 @@ public interface ZufangItemService {
 	 * @param page
 	 * @return
 	 */
-	public SimplePage<ZufangItemDto> getZufangItems(Page<ZufangItemDto> page);
+	public SimplePage<ZufangItemDto> getZufangItems(PageParam page);
 }

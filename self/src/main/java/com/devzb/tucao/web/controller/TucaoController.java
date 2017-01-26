@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.devzb.framework.common.BaseController;
+import com.devzb.framework.common.bean.PageParam;
 import com.devzb.framework.common.bean.Protocol;
-import com.devzb.tucao.dao.dto.TucaoItemDto;
 import com.devzb.tucao.service.TucaoItemService;
-import com.github.pagehelper.Page;
 
 /**
  * 吐槽
@@ -43,7 +42,7 @@ public class TucaoController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "data")
-	public String tucaoData(Model model, Page<TucaoItemDto> page) {
+	public String tucaoData(Model model, PageParam page) {
 
 		Protocol protocol = new Protocol();
 		protocol.setData(tucaoItemService.getTucaoItems(page));

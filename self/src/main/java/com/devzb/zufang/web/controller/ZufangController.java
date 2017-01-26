@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.devzb.framework.common.BaseController;
+import com.devzb.framework.common.bean.PageParam;
 import com.devzb.framework.common.bean.Protocol;
-import com.devzb.zufang.dao.dto.ZufangItemDto;
 import com.devzb.zufang.service.ZufangItemService;
-import com.github.pagehelper.Page;
 
 /**
  * 租房
@@ -45,7 +44,7 @@ public class ZufangController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "data")
-	public String zufangData(Model model, Page<ZufangItemDto> page) {
+	public String zufangData(Model model, PageParam page) {
 
 		Protocol protocol = new Protocol();
 		protocol.setData(zufangItemService.getZufangItems(page));

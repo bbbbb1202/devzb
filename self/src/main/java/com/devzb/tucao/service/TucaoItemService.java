@@ -1,9 +1,9 @@
 package com.devzb.tucao.service;
 
+import com.devzb.framework.common.bean.PageParam;
 import com.devzb.framework.common.bean.SimplePage;
 import com.devzb.tucao.dao.dto.TucaoItemDto;
 import com.devzb.tucao.dao.model.TucaoItem;
-import com.github.pagehelper.Page;
 
 /**
  * 吐槽service
@@ -19,7 +19,7 @@ public interface TucaoItemService {
 	 * @param page
 	 * @return
 	 */
-	public SimplePage<TucaoItemDto> getTucaoItems(Page<TucaoItemDto> page);
+	public SimplePage<TucaoItemDto> getTucaoItems(PageParam page);
 
 	public TucaoItem saveTucaoItem(TucaoItem tucaoItem);
 }
