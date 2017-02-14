@@ -1,13 +1,10 @@
 
 package com.devzb.framework.common;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.devzb.framework.utils.WebDataUtil;
 
@@ -33,24 +30,6 @@ public class BaseController {
 	 * 返回页面
 	 */
 	protected static final String	BACK	= "framework/back";
-
-	/**
-	 * 获得request
-	 * 
-	 * @return
-	 */
-	protected HttpServletRequest getRequest() {
-		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-	}
-
-	/**
-	 * 获得response
-	 * 
-	 * @return
-	 */
-	protected HttpServletResponse getResponse() {
-		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-	}
 
 	/**
 	 * 返回json字符串
