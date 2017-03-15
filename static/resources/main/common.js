@@ -1,5 +1,4 @@
 if (typeof (JSON) == 'undefined') {
-    // 如果浏览器不支持JSON，则载入json2.js
     $.getScript('/resources/json2.js');
 }
 
@@ -69,9 +68,6 @@ function hideJscharts(divId) {
     var timer = setInterval(timeCountDown, 10);
 }
 
-/**
- * 判定空
- */
 function isNull(str) {
     if (typeof str == 'undefined' || str == undefined || str == null
         || str == '') {
@@ -81,9 +77,6 @@ function isNull(str) {
     return false;
 }
 
-/**
- * 判定非空
- */
 function isNotNull(str) {
     if (typeof str != 'undefined' && str != undefined && str != null
         && str != '') {
@@ -93,8 +86,20 @@ function isNotNull(str) {
     return false;
 }
 
+var devzbLayer;
+function showDevzbLoading() {
+	devzbLayer = layer.load(2, {
+		time : 30 * 1000
+	});
+}
+function hiddenDevzbLoading() {
+	if (devzbLayer) {
+		layer.close(devzbLayer);
+	}
+}
+
 /**
- * ajax请求
+ * ajax
  * @param url
  * @param params
  * @param callback
@@ -117,22 +122,14 @@ function myAjax(url, params, callback, type, complete, loading) {
         type = "POST";
     }
 
-    var loadLayer;
-    var loadingFunction = function () {
-        layer.close(loadLayer);
-    }
-    if (typeof loading == 'function') {
-        loadingFunction = loading
-    } else if (typeof loading == 'boolean') {
+    if (typeof loading == 'boolean') {
         // nothing
     } else {
         loading = true
     }
 
     if (loading) {
-        loadLayer = layer.load(2, {
-            time: 30 * 1000
-        });
+    	showDevzbLoading();
     }
 
     var isSuccess = false;
@@ -141,7 +138,7 @@ function myAjax(url, params, callback, type, complete, loading) {
         url: url,
         async: false,
         data: params,
-        timeout: 20000,
+        timeout: 30000,
         dataType: "json",
         success: function (response) {
             if (!response) {
@@ -174,7 +171,7 @@ function myAjax(url, params, callback, type, complete, loading) {
         },
         complete: function (res) {
             if (isSuccess && loading) {
-                loadingFunction()
+            	hiddenDevzbLoading()
             }
             typeof complete == "function" && complete(res);
         }
@@ -235,17 +232,9 @@ function alertModel(msg, callback) {
     });
 }
 
-var devzbLayer;
-function showKksLoading() {
-    devzbLayer = layer.load(2, {
-        time: 30 * 1000
-    });
-}
-
-// 日期格式转换
 function getFormatDateByLong(l, pattern) {
     return getFormatDate(new Date(l - 0), pattern);
-};
+}
 function getFormatDate(date, pattern) {
     if (date == undefined) {
         date = new Date();
@@ -254,7 +243,7 @@ function getFormatDate(date, pattern) {
         pattern = "yyyy-MM-dd";
     }
     return date.format(pattern);
-};
+}
 Date.prototype.format = function (format) {
     var o = {
         "M+": this.getMonth() + 1,
