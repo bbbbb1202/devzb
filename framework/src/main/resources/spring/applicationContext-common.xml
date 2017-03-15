@@ -38,6 +38,7 @@
 				<beans:value>/ueditor</beans:value>
 			</beans:array>
 		</beans:property>
+		<beans:property name="staticHost" value="${host.static}"/>
 	</beans:bean>
 
 	<beans:bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
