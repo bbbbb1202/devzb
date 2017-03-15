@@ -10,7 +10,7 @@
 		<div id="graph">载入中...</div>
 	</div>
 	<%@include file="../common/footer.jsp"%>
-	<script type="text/javascript" src="/resources/js/jscharts.js"></script>
+	<script type="text/javascript" src="${staticHost}/resources/jscharts.js"></script>
 	<script type="text/javascript" src="/resources/js/devzb/metal/zinc.js"></script>
 </body>
 </html>
