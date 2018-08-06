@@ -17,21 +17,21 @@ import us.codecraft.webmagic.processor.PageProcessor;
  *
  */
 public class ZincSmmPageProcessor implements PageProcessor {
-	
+
 	private Logger			logger			= LoggerFactory.getLogger(getClass());
-	
+
 	public static String	ZINC_PRICE_KEY	= "zincPrice";
-	
+
 	private Site			site			= Site.me().setRetryTimes(3).setSleepTime(3000);
 
 	@Override
 	public void process(Page page) {
-		String zincPrice = page.getHtml().xpath("//div[@class='first']/span[@class='value3']/text()").toString();
+		String zincPrice = page.getHtml().xpath("//li[@product_id='zn0000']/span[@class='fvalue2']/text()").toString();
 
 		logger.info("执行一次结果：{} ", zincPrice);
 
 		page.putField(ZINC_PRICE_KEY, zincPrice);
-		
+
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class ZincSmmPageProcessor implements PageProcessor {
 	public static String getZincPriceBySpider() {
 		// 爬虫抓取
 		Spider spider = Spider.create(new ZincSmmPageProcessor()).thread(1);
-		String urlTemplate = "http://hq.smm.cn/xin";
+		String urlTemplate = "https://hq.smm.cn/xin";
 		ResultItems resultItems = spider.<ResultItems> get(urlTemplate);
 		String zincPrice = resultItems.get(ZincSmmPageProcessor.ZINC_PRICE_KEY);
 		spider.close();
